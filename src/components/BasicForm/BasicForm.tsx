@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import { Formik } from "formik";
 
 type Values = {
@@ -28,7 +29,7 @@ const BasicForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div css={style}>
       <h1>Formik BasicForm!</h1>
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -53,7 +54,7 @@ const BasicForm: React.FC = () => {
               onBlur={handleBlur}
               value={values.email}
             />
-            {errors.email && touched.email && errors.email}
+            <div className="errors">{errors.email && touched.email && errors.email}</div>
             <input
               type="password"
               name="password"
@@ -61,7 +62,7 @@ const BasicForm: React.FC = () => {
               onBlur={handleBlur}
               value={values.password}
             />
-            {errors.password && touched.password && errors.password}
+            <div className="errors">{errors.password && touched.password && errors.password}</div>
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
@@ -73,3 +74,24 @@ const BasicForm: React.FC = () => {
 };
 
 export default BasicForm;
+
+const style = css`
+  width: 20rem;
+  height: 30rem;
+  margin: 2rem auto;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  input {
+    display: block;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    width: 15rem;
+  }
+
+  .errors {
+    color: red;
+  }
+`;
